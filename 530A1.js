@@ -49,6 +49,10 @@ var VariableFinder = {
          if (typeof node == 'object') {
             if (node[0] == 'name') {
                this.addVariable(variables, node[1]);
+            } else if (node[0] == 'var') {
+               node[1].each(function(declaration) {
+                  this.addVariable(variables, declaration[0]);
+               }.bind(this));
             } else {
                this.getVariablesHelper(node, variables);
             }
